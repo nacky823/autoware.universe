@@ -1,10 +1,11 @@
 /**:
   ros__parameters:
     # Use dynamic map loading
-    use_dynamic_map_loading: true
+    use_dynamic_map_loading: false
 
     # Vehicle reference frame
     base_frame: "base_link"
+    ndt_base_frame: "base_link"
 
     # Subscriber queue size
     input_sensor_points_queue_size: 1
