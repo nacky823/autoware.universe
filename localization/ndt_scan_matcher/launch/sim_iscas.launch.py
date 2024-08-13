@@ -25,7 +25,7 @@ def generate_launch_description():
     params_file = os.path.join(
         get_package_share_directory(pkg),
         "config",
-        "ndt_scan_matcher.param.yaml",
+        "sim_iscas.param.yaml",
     )
 
     ndt_node = Node(
