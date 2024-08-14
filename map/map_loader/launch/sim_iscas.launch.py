@@ -21,7 +21,8 @@ def generate_launch_description():
 
     pkg = "map_loader"
 
-    map_path = "/home/nacky/mugimaru_share/data/map/iscas_sim/success/iscas_museum_3d_1.pcd"
+    home_path = os.path.expanduser("~")
+    map_path = os.path.join(home_path, 'maps', 'iscas_museum', 'iscas_museum_3d.pcd')
     map_path_param = [
         {
             "pcd_paths_or_directory": [map_path],
