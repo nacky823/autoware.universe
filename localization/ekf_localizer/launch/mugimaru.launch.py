@@ -11,6 +11,11 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
+    param_file_name=LaunchConfiguration('param_file_name')
+    declare_param_file_name=DeclareLaunchArgument(
+        'param_file_name',
+        default_value='mugimaru.param.yaml',
+    )
     use_sim_time=LaunchConfiguration('use_sim_time')
     declare_use_sim_time=DeclareLaunchArgument(
         'use_sim_time',
@@ -19,7 +24,7 @@ def generate_launch_description():
 
     param_path=os.path.join(
         get_package_share_directory('ekf_localizer'),
-        'config', 'mugimaru.param.yaml'
+        'config', param_file_name
     )
 
     ekf_localizer=Node(
@@ -49,6 +54,7 @@ def generate_launch_description():
 
     ld=LaunchDescription()
 
+    ld.add_action(declare_param_file_name)
     ld.add_action(declare_use_sim_time)
     ld.add_action(ekf_localizer)
 
