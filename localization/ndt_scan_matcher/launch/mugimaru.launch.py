@@ -1,12 +1,11 @@
 # SPDX-FileCopyrightText: 2024 nacky823 youjiyongmu4@gmail.com
 # SPDX-License-Identifier: Apache-2.0
 
-import os
-from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
+from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
@@ -14,17 +13,16 @@ def generate_launch_description():
     param_file_name=LaunchConfiguration('param_file_name')
     declare_param_file_name=DeclareLaunchArgument(
         'param_file_name',
-        default_value='mugimaru.param.yaml',
+        default_value='iscas_museum.param.yaml',
     )
+    param_path=PathJoinSubstitution([
+        FindPackageShare('ndt_scan_matcher'), 'config', param_file_name
+    ])
+
     use_sim_time=LaunchConfiguration('use_sim_time')
     declare_use_sim_time=DeclareLaunchArgument(
         'use_sim_time',
         default_value='True',
-    )
-
-    param_path=os.path.join(
-        get_package_share_directory('ndt_scan_matcher'),
-        'config', param_file_name
     )
 
     ndt_scan_matcher=Node(
