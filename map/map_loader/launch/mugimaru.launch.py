@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import os
-from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
+from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
@@ -25,10 +25,9 @@ def generate_launch_description():
         'param_file_name',
         default_value='iscas_museum.param.yaml',
     )
-    param_path=os.path.join(
-        get_package_share_directory('map_loader'),
-        'config', param_file_name
-    )
+    param_path=PathJoinSubstitution([
+        FindPackageShare('map_loader'), 'config', param_file_name
+    ])
 
     use_sim_time=LaunchConfiguration('use_sim_time')
     declare_use_sim_time=DeclareLaunchArgument(
@@ -42,7 +41,7 @@ def generate_launch_description():
         name='pointcloud_map_loader',
         parameters=[
             param_path,
-            {'pcd_paths_or_directory': [map_path]},
+            {'pcd_paths_or_directory': [[map_path]]},
             {'pcd_metadata_path': map_path},
             {'use_sim_time': use_sim_time},
         ],
