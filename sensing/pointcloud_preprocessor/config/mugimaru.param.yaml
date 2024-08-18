@@ -38,5 +38,4 @@ random_downsample_filter:
 
 distortion_corrector:
   ros__parameters:
-    input_frame: "livox_frame"
-    output_frame: "livox_frame"
+    use_imu: True
