@@ -1,0 +1,41 @@
+back_crop_box_filter:
+  ros__parameters:
+    input_frame: "livox_frame"
+    output_frame: "livox_frame"
+    min_x: -6.0
+    max_x: 0.0
+    min_y: -1.5
+    max_y: 1.5
+    min_z: -2.0
+    max_z: 2.0
+    negative: True
+
+down_crop_box_filter:
+  ros__parameters:
+    input_frame: "livox_frame"
+    output_frame: "livox_frame"
+    min_x: 0.0
+    max_x: 30.0
+    min_y: -15.0
+    max_y: 15.0
+    min_z: -0.5
+    max_z: 0.15
+    negative: True
+
+voxel_grid_filter:
+  ros__parameters:
+    input_frame: "livox_frame"
+    output_frame: "livox_frame"
+    voxel_size_x: 0.5
+    voxel_size_y: 0.5
+    voxel_size_z: 0.5
+
+random_downsample_filter:
+  ros__parameters:
+    input_frame: "livox_frame"
+    output_frame: "livox_frame"
+    sample_num: 3000
+
+distortion_corrector:
+  ros__parameters:
+    use_imu: True
